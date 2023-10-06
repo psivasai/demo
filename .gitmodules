@@ -1,0 +1,3 @@
+[submodule "onlinebookstore"]
+	path = onlinebookstore
+	url = https://github.com/shashirajraja/onlinebookstore.git

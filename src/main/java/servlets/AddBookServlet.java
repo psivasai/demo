@@ -18,9 +18,12 @@ import com.book.service.BookService;
 import com.book.service.impl.BookServiceImpl;
 import com.book.util.StoreUtil;
 
+//Servlet class handling requests to add books to the store.
 public class AddBookServlet extends HttpServlet {
     BookService bookService = new BookServiceImpl();
 
+    
+    // Service method to handle both GET and POST requests.
     public void service(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
         PrintWriter pw = res.getWriter();
         res.setContentType(BookStoreConstants.CONTENT_TYPE_TEXT_HTML);
@@ -31,7 +34,8 @@ public class AddBookServlet extends HttpServlet {
             pw.println("<table class=\"tab\"><tr><td>Please Login First to Continue!!</td></tr></table>");
             return;
         }
-
+        
+     // Retrieve book details from the request parameters.
         String bName = req.getParameter(BooksDBConstants.COLUMN_NAME);
         RequestDispatcher rd = req.getRequestDispatcher("SellerHome.html");
         rd.include(req, res);
