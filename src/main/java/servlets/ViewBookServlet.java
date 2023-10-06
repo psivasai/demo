@@ -11,11 +11,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.bittercode.model.Book;
-import com.bittercode.model.UserRole;
-import com.bittercode.service.BookService;
-import com.bittercode.service.impl.BookServiceImpl;
-import com.bittercode.util.StoreUtil;
+import com.book.model.Book;
+import com.book.model.UserRole;
+import com.book.service.BookService;
+import com.book.service.impl.BookServiceImpl;
+import com.book.util.StoreUtil;
 
 public class ViewBookServlet extends HttpServlet {
 
@@ -46,9 +46,9 @@ public class ViewBookServlet extends HttpServlet {
             StoreUtil.setActiveTab(pw, "books");
 
             // Show the heading for the page
-            pw.println("<div id='topmid' style='background-color:grey'>Available Books"
-                    + "<form action=\"cart\" method=\"post\" style='float:right; margin-right:20px'>"
-                    + "<input type='submit' class=\"btn btn-primary\" name='cart' value='Proceed'/></form>"
+            pw.println("<div   style= \"color: #FFFFFF;  text-align: center; text-shadow: 2px 2px #ff0000;  width: 100%;  margin-bottom: 10px; padding: 8px; font-weight: bold; font-size: 25px; font-style: oblique;\">Available Books"
+                    + "<form action=\"cart\" method=\"post\" style='float:right; margin-right:20px; margin-top:-3px'>"
+                    + "<input type='submit' class=\"btn btn-primary\" name='cart' value='Go to Cart'/></form>"
                     + "</div>");
             pw.println("<div class=\"container\">\r\n"
                     + "        <div class=\"card-columns\">");
@@ -65,10 +65,10 @@ public class ViewBookServlet extends HttpServlet {
             }
 
             // Checkout Button
-            pw.println("</div>"
-                    + "<div style='float:auto'><form action=\"cart\" method=\"post\">"
-                    + "<input type='submit' class=\"btn btn-success\" name='cart' value='Proceed to Checkout'/></form>"
-                    + "    </div>");
+//            pw.println("</div>"
+//                    + "<div style='float:auto'><form action=\"cart\" method=\"post\">"
+//                    + "<input type='submit' class=\"btn btn-success\" name='cart' value='Proceed to Checkout'/></form>"
+//                    + "    </div>");
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -93,15 +93,11 @@ public class ViewBookServlet extends HttpServlet {
             // If no items in the cart, show add to cart button
             // If items is added to the cart, then show +, - button to add/remove more items
             button = "<form action=\"viewbook\" method=\"post\">"
-                    + "<input type='hidden' name = 'selectedBookId' value = " + bCode + ">"
+                    + "<input type='hidden' name='selectedBookId' value='" + bCode + "'/>"
                     + "<input type='hidden' name='qty_" + bCode + "' value='1'/>"
                     + (cartItemQty == 0
                             ? "<input type='submit' class=\"btn btn-primary\" name='addToCart' value='Add To Cart'/></form>"
-                            : "<form method='post' action='cart'>"
-                                    + "<button type='submit' name='removeFromCart' class=\"glyphicon glyphicon-minus btn btn-danger\"></button> "
-                                    + "<input type='hidden' name='selectedBookId' value='" + bCode + "'/>"
-                                    + cartItemQty
-                                    + " <button type='submit' name='addToCart' class=\"glyphicon glyphicon-plus btn btn-success\"></button></form>")
+                            : "<div class=\"bg-success text-center p-1 text-white\">Added to Cart</div>")
                     + "";
         } else {
             // If available Quantity is zero, show out of stock button
@@ -132,10 +128,9 @@ public class ViewBookServlet extends HttpServlet {
                 + "                    </div>\r\n"
                 + "                    <div class=\"col-sm-6\">\r\n"
                 + "                        <p class=\"card-text\">\r\n"
-                + "                        Price: <span style=\"font-weight:bold; color:green\"> &#8377; "
+                + "                        Price: <span style=\"font-weight:bold; color:green\"> &#163; "
                 + book.getPrice()
                 + " </span>\r\n"
-                + "                        </p>\r\n"
                 + button
                 + "                    </div>\r\n"
                 + "                </div>\r\n"

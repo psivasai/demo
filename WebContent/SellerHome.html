@@ -1,37 +1,30 @@
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>Book Store</title>
-<link rel="apple-touch-icon" sizes="180x180"
-	href="./favicons/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32"
-	href="./favicons/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16"
-	href="./favicons/favicon-16x16.png">
-<link rel="manifest" href="./favicons/site.webmanifest">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Retro Reads</title>
+
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css">
-<link rel="stylesheet" href="styles.css">
+
 <!-- JavaScript Bundle with Popper -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
 	
-</script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"> </script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"> </script>
 	
-</script>
+
 <script>
 	var activeTab = 'home';
 </script>
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
-	<header>
+<!--	<header>
 		<nav class="navbar navbar-expand-sm bg-dark"
 			style="margin-bottom: 0px">
-			<a class="navbar-brand"> <!-- The below line can be an image or a h1, either will work -->
+			<a class="navbar-brand">  The below line can be an image or a h1, either will work 
 				<img src="logo.png" alt="Google logo" width="60" height="30px">
 			</a>
 
@@ -56,14 +49,36 @@
 					<li class="nav-item "><span><a class="nav-link"
 							href="removebook" id="removebook">Remove
 								Books</a></span></li>
+					</ul>			
+					<ul class="navbar-nav ml-auto">			
 					<li class="nav-item "><span><a class="nav-link"
 							href="about" id="about">About Us</a></span></li>
 					<li class="nav-item "><span><a class="nav-link"
 							href="logout" id="logout">Logout</a></span></li>
-				</ul>
+					</ul>		
+				
 			</div>
 		</nav>
-	</header>
+	</header>-->
+		<nav class="navbar">
+        <div class="logo">
+            <img src="./books.png" alt="">
+        </div>
+        <div class="menu-toggle" id="menu-toggle">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="storebooks" id = "home">Home</a></li>
+            <li><a href="storebooks" id="storebooks">Available Books</a></li>
+            <li><a href="addbook" id = "addbook">Add Book</a></li>
+            <li><a href="removebook" id = "removebook">Remove Book</a></li>
+            <li><a href="./AboutUs.html" id="about">About Us</a></li>
+            <li><a href="logout" id="logout">Logout</a></li>
+        </ul>
+    </nav>
+	
 
 </body>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
@@ -72,6 +87,12 @@
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.2.1/dist/js/bootstrap.min.js"></script>
 <script>
+	    const menuToggle = document.getElementById('menu-toggle');
+const navLinks = document.getElementById('nav-links');
+
+menuToggle.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+});
 	document.getElementById(activeTab).classList.add("active");
 </script>
 </html>

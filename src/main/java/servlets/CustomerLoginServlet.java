@@ -5,16 +5,19 @@ import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.bittercode.constant.BookStoreConstants;
-import com.bittercode.constant.db.UsersDBConstants;
-import com.bittercode.model.User;
-import com.bittercode.model.UserRole;
-import com.bittercode.service.UserService;
-import com.bittercode.service.impl.UserServiceImpl;
+import com.book.constant.BookStoreConstants;
+import com.book.constant.db.UsersDBConstants;
+import com.book.model.User;
+import com.book.model.UserRole;
+import com.book.service.UserService;
+import com.book.service.impl.UserServiceImpl;
+
+
 
 public class CustomerLoginServlet extends HttpServlet {
 
@@ -33,13 +36,11 @@ public class CustomerLoginServlet extends HttpServlet {
 
                 RequestDispatcher rd = req.getRequestDispatcher("CustomerHome.html");
                 rd.include(req, res);
-                pw.println("    <div id=\"topmid\"><h1>Welcome to Online <br>Book Store</h1></div>\r\n"
+                pw.println("    <div class = \"mainHeading\" id=\"topmid\"><h1>Welcome to the <br>Retro Reads</h1></div>\r\n"
                         + "    <br>\r\n"
-                        + "    <table class=\"tab\">\r\n"
-                        + "        <tr>\r\n"
-                        + "            <td><p>Welcome "+user.getFirstName()+", Happy Learning !!</p></td>\r\n"
-                        + "        </tr>\r\n"
-                        + "    </table>");
+                        + "    <p class = \"caption\" >Welcome "+user.getFirstName()+", Happy Learning !!</p>\r\n"
+              
+                        + "    ");
 
             } else {
 

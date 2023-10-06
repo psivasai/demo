@@ -9,9 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.bittercode.constant.BookStoreConstants;
-import com.bittercode.model.UserRole;
-import com.bittercode.util.StoreUtil;
+import com.book.constant.BookStoreConstants;
+import com.book.model.UserRole;
+import com.book.util.StoreUtil;
 
 public class CheckoutServlet extends HttpServlet {
     public void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
@@ -28,7 +28,7 @@ public class CheckoutServlet extends HttpServlet {
             RequestDispatcher rd = req.getRequestDispatcher("payment.html");
             rd.include(req, res);
             StoreUtil.setActiveTab(pw, "cart");
-            pw.println("Total Amount<span class=\"price\" style=\"color: black\"><b>&#8377; "
+            pw.println("Total Amount<span class=\"price\" style=\"color: black\"><b>&#163; "
                     + req.getSession().getAttribute("amountToPay")
                     + "</b></span>");
 

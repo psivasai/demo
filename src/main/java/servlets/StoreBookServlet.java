@@ -10,11 +10,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.bittercode.model.Book;
-import com.bittercode.model.UserRole;
-import com.bittercode.service.BookService;
-import com.bittercode.service.impl.BookServiceImpl;
-import com.bittercode.util.StoreUtil;
+import com.book.model.Book;
+import com.book.model.UserRole;
+import com.book.service.BookService;
+import com.book.service.impl.BookServiceImpl;
+import com.book.util.StoreUtil;
 
 public class StoreBookServlet extends HttpServlet {
 
@@ -46,7 +46,7 @@ public class StoreBookServlet extends HttpServlet {
 
             // Read the books from the database with the respective bookIds
             List<Book> books = bookService.getAllBooks();
-            pw.println("<div id='topmid' style='background-color:grey'>Books Available In the Store</div>");
+            pw.println("<div style= \"color: #FFFFFF;  text-align: center; text-shadow: 2px 2px #ff0000;  width: 100%;  margin-bottom: 10px; padding: 8px; font-weight: bold; font-size: 25px; font-style: oblique;\" >Books Available In the Store</div>");
             pw.println("<table class=\"table table-hover\" style='background-color:white'>\r\n"
                     + "  <thead>\r\n"
                     + "    <tr style='background-color:black; color:white;'>\r\n"
@@ -81,7 +81,7 @@ public class StoreBookServlet extends HttpServlet {
                 + "      <th scope=\"row\">" + book.getBarcode() + "</th>\r\n"
                 + "      <td>" + book.getName() + "</td>\r\n"
                 + "      <td>" + book.getAuthor() + "</td>\r\n"
-                + "      <td><span>&#8377;</span> " + book.getPrice() + "</td>\r\n"
+                + "      <td><span>&#163;</span>" + book.getPrice() + "</td>\r\n"
                 + "      <td>"
                 + book.getQuantity()
                 + "      </td>\r\n"

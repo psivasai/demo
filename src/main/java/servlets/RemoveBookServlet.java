@@ -9,11 +9,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.bittercode.constant.ResponseCode;
-import com.bittercode.model.UserRole;
-import com.bittercode.service.BookService;
-import com.bittercode.service.impl.BookServiceImpl;
-import com.bittercode.util.StoreUtil;
+import com.book.constant.ResponseCode;
+import com.book.model.UserRole;
+import com.book.service.BookService;
+import com.book.service.impl.BookServiceImpl;
+import com.book.util.StoreUtil;
 
 public class RemoveBookServlet extends HttpServlet {
 
@@ -64,9 +64,9 @@ public class RemoveBookServlet extends HttpServlet {
                 + "        <table class=\"tab\">\r\n"
                 + "        <tr>\r\n"
                 + "            <td>\r\n"
-                + "                <label for=\"bookCode\">Enter BookId to Remove </label>\r\n"
-                + "                <input type=\"text\" name=\"bookId\" placeholder=\"Enter Book Id\" id=\"bookCode\" required>\r\n"
-                + "                <input class=\"btn btn-danger my-2\" type=\"submit\" value=\"Remove Book\">\r\n"
+                + "                <label for=\"bookCode\" style = \"font-size:20px; padding:10px\">Enter Book Id to Remove </label>\r\n"
+                + "                <input type=\"text\" name=\"bookId\" placeholder=\"Enter Book Id\" id=\"bookCode\" class=\"inputValues\" required><br/>\r\n"
+                + "                <input class=\"btn btn-danger my-2 inputValues\" type=\"submit\" value=\"Remove Book\">\r\n"
                 + "            </td>\r\n"
                 + "        </tr>\r\n"
                 + "\r\n"

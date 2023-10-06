@@ -10,13 +10,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.bittercode.constant.BookStoreConstants;
-import com.bittercode.constant.db.BooksDBConstants;
-import com.bittercode.model.Book;
-import com.bittercode.model.UserRole;
-import com.bittercode.service.BookService;
-import com.bittercode.service.impl.BookServiceImpl;
-import com.bittercode.util.StoreUtil;
+import com.book.constant.BookStoreConstants;
+import com.book.constant.db.BooksDBConstants;
+import com.book.model.Book;
+import com.book.model.UserRole;
+import com.book.service.BookService;
+import com.book.service.impl.BookServiceImpl;
+import com.book.util.StoreUtil;
 
 public class AddBookServlet extends HttpServlet {
     BookService bookService = new BookServiceImpl();
@@ -72,11 +72,15 @@ public class AddBookServlet extends HttpServlet {
                 + "            <td>\r\n"
                 + "                <form action=\"addbook\" method=\"post\">\r\n"
                 + "                    <!-- <label for=\"bookCode\">Book Code : </label><input type=\"text\" name=\"barcode\" id=\"bookCode\" placeholder=\"Enter Book Code\" required><br/> -->\r\n"
-                + "                    <label for=\"bookName\">Book Name : </label> <input type=\"text\" name=\"name\" id=\"bookName\" placeholder=\"Enter Book's name\" required><br/>\r\n"
-                + "                    <label for=\"bookAuthor\">Book Author : </label><input type=\"text\" name=\"author\" id=\"bookAuthor\" placeholder=\"Enter Author's Name\" required><br/>\r\n"
-                + "                    <label for=\"bookPrice\">Book Price : </label><input type=\"number\" name=\"price\" placeholder=\"Enter the Price\" required><br/>\r\n"
-                + "                    <label for=\"bookQuantity\">Book Qnty : </label><input type=\"number\" name=\"quantity\" id=\"bookQuantity\" placeholder=\"Enter the quantity\" required><br/>\r\n"
-                + "                    <input class=\"btn btn-success my-2\" type=\"submit\" value=\" Add Book \">\r\n"
+                + "                    <label for=\"bookName\" class= \"labels\">Book Name : </label> <br/>\r\n"
+                + "						<input type=\"text\" name=\"name\" id=\"bookName\" class=\"inputValues\" placeholder=\"Enter Book's name\" required><br/>\r\n"
+                + "                    <label for=\"bookAuthor\" class= \"labels\">Book Author : </label> <br/>\r\n"
+                + "						<input type=\"text\" name=\"author\" id=\"bookAuthor\" class=\"inputValues\" placeholder=\"Enter Author's Name\" required><br/>\r\n"
+                + "                    <label for=\"bookPrice\" class= \"labels\">Book Price : </label><br/>\r\n"
+                + "						<input type=\"number\" name=\"price\" class=\"inputValues\" placeholder=\"Enter the Price\" required><br/>\r\n"
+                + "                    <label for=\"bookQuantity\" class= \"labels\">Book Qnty : </label> <br/>\r\n"
+                + "						<input type=\"number\" name=\"quantity\" id=\"bookQuantity\" class=\"inputValues\" placeholder=\"Enter the quantity\" required><br/>\r\n"
+                + "                    <input class=\"btn btn-success my-2 inputValues\" type=\"submit\" value=\" Add Book \">\r\n"
                 + "                </form>\r\n"
                 + "            </td>\r\n"
                 + "        </tr>  \r\n"

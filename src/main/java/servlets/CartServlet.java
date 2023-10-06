@@ -1,3 +1,4 @@
+
 package servlets;
 
 import java.io.IOException;
@@ -12,13 +13,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.bittercode.constant.BookStoreConstants;
-import com.bittercode.model.Book;
-import com.bittercode.model.Cart;
-import com.bittercode.model.UserRole;
-import com.bittercode.service.BookService;
-import com.bittercode.service.impl.BookServiceImpl;
-import com.bittercode.util.StoreUtil;
+import com.book.util.StoreUtil;
+import com.book.constant.BookStoreConstants;
+import com.book.model.Book;
+import com.book.model.Cart;
+import com.book.model.UserRole;
+import com.book.service.BookService;
+import com.book.service.impl.BookServiceImpl;
 
 public class CartServlet extends HttpServlet {
 
@@ -54,7 +55,7 @@ public class CartServlet extends HttpServlet {
             // Read the books from the database with the respective bookIds
             List<Book> books = bookService.getBooksByCommaSeperatedBookIds(bookIds);
             List<Cart> cartItems = new ArrayList<Cart>();
-            pw.println("<div id='topmid' style='background-color:grey'>Shopping Cart</div>");
+            pw.println("<div style= \"color: #FFFFFF;  text-align: center; text-shadow: 2px 2px #ff0000;  width: 100%;  margin-bottom: 10px; padding: 8px; font-weight: bold; font-size: 25px; font-style: oblique;\">Shopping Cart</div>");
             pw.println("<table class=\"table table-hover\" style='background-color:white'>\r\n"
                     + "  <thead>\r\n"
                     + "    <tr style='background-color:black; color:white;'>\r\n"
@@ -63,6 +64,7 @@ public class CartServlet extends HttpServlet {
                     + "      <th scope=\"col\">Author</th>\r\n"
                     + "      <th scope=\"col\">Price/Item</th>\r\n"
                     + "      <th scope=\"col\">Quantity</th>\r\n"
+                    + "      <th scope=\"col\">Remove</th>\r\n"
                     + "      <th scope=\"col\">Amount</th>\r\n"
                     + "    </tr>\r\n"
                     + "  </thead>\r\n"
@@ -75,10 +77,21 @@ public class CartServlet extends HttpServlet {
             }
             for (Book book : books) {
                 int qty = (int) session.getAttribute("qty_" + book.getBarcode());
+                // Get the updated quantity from the dropdown
+                String newQtyParam = req.getParameter("quantity_" + book.getBarcode());
+                if (newQtyParam != null) {
+                    int newQty = Integer.parseInt(newQtyParam);
+                    if (newQty >= 1 && newQty <= 10) {  // Adjust the range if needed
+                        qty = newQty;
+                        session.setAttribute("qty_" + book.getBarcode(), qty);
+                    }
+                }
+
                 Cart cart = new Cart(book, qty);
                 cartItems.add(cart);
                 amountToPay += (qty * book.getPrice());
-                pw.println(getRowData(cart));
+                pw.println(getRowData(cart, book.getBarcode(), req));
+
             }
 
             // set cartItems and amountToPay in the session
@@ -87,19 +100,21 @@ public class CartServlet extends HttpServlet {
 
             if (amountToPay > 0) {
                 pw.println("    <tr style='background-color:green'>\r\n"
-                        + "      <th scope=\"row\" colspan='5' style='color:yellow; text-align:center;'> Total Amount To Pay </th>\r\n"
-                        + "      <td colspan='1' style='color:white; font-weight:bold'><span>&#8377;</span> "
+                        + "      <th scope=\"row\" colspan='6' style='color:yellow; text-align:right;'> Total Amount To Pay </th>\r\n"
+                        + "      <td colspan='1' style='color:white; font-weight:bold'><span>&#163;</span> "
                         + amountToPay
                         + "</td>\r\n"
                         + "    </tr>\r\n");
             }
             pw.println("  </tbody>\r\n"
                     + "</table>");
-            if (amountToPay > 0) {
+           
+
+ if (amountToPay > 0) {
                 pw.println("<div style='text-align:right; margin-right:20px;'>\r\n"
                         + "<form action=\"checkout\" method=\"post\">"
-                        + "<input type='submit' class=\"btn btn-primary\" name='pay' value='Proceed to Pay &#8377; "
-                        + amountToPay + "'/></form>"
+                        + "<input type='submit' class=\"btn btn-primary\" name='pay' value='Proceed to Pay &#163;"
+                        + amountToPay + "  '/></form>"
                         + "    </div>");
             }
         } catch (Exception e) {
@@ -107,19 +122,33 @@ public class CartServlet extends HttpServlet {
         }
     }
 
-    public String getRowData(Cart cart) {
+    public String getRowData(Cart cart, String bookBarcode, HttpServletRequest req) {
         Book book = cart.getBook();
+        int selectedQuantity = cart.getQuantity(); // Get the initially selected quantity
+        
+        StringBuilder dropdownOptions = new StringBuilder();
+        for (int i = 1; i <= 10; i++) {  // Assuming a maximum quantity of 10, you can adjust this as needed
+            dropdownOptions.append("<option value='" + i + "'" + (i == selectedQuantity ? " selected" : "") + ">" + i + "</option>");
+        }
+
         return "    <tr>\r\n"
                 + "      <th scope=\"row\">" + book.getBarcode() + "</th>\r\n"
                 + "      <td>" + book.getName() + "</td>\r\n"
                 + "      <td>" + book.getAuthor() + "</td>\r\n"
-                + "      <td><span>&#8377;</span> " + book.getPrice() + "</td>\r\n"
-                + "      <td><form method='post' action='cart'><button type='submit' name='removeFromCart' class=\"glyphicon glyphicon-minus btn btn-danger\"></button> "
+                + "      <td><span>&#163;</span> " + book.getPrice() + "</td>\r\n"
+                + "      <td><form method='post' action='cart'>"
+                + "      <select name='quantity_" + bookBarcode + "' onchange='this.form.submit()'>"
+                + dropdownOptions.toString()
+                + "</select>"
                 + "<input type='hidden' name='selectedBookId' value='" + book.getBarcode() + "'/>"
-                + cart.getQuantity()
-                + " <button type='submit' name='addToCart' class=\"glyphicon glyphicon-plus btn btn-success\"></button></form></td>\r\n"
-                + "      <td><span>&#8377;</span> " + (book.getPrice() * cart.getQuantity()) + "</td>\r\n"
+                + "</form></td>\r\n"
+                + "      <td><form method='post' action='cart'>"
+                + "<button type='submit' name='removeFromCart' value='" + book.getBarcode() + "' class=\"glyphicon glyphicon-trash btn btn-danger\"></button> "
+                + "<input type='hidden' name='selectedBookId' value='" + book.getBarcode() + "'/>"
+                + "</form></td>\r\n"
+                + "      <td><span>&#163;</span> " + (book.getPrice() * selectedQuantity) + "</td>\r\n"
                 + "    </tr>\r\n";
     }
+
 
 }

@@ -11,13 +11,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.bittercode.constant.BookStoreConstants;
-import com.bittercode.model.Book;
-import com.bittercode.model.Cart;
-import com.bittercode.model.UserRole;
-import com.bittercode.service.BookService;
-import com.bittercode.service.impl.BookServiceImpl;
-import com.bittercode.util.StoreUtil;
+import com.book.constant.BookStoreConstants;
+import com.book.model.Book;
+import com.book.model.Cart;
+import com.book.model.UserRole;
+import com.book.service.BookService;
+import com.book.service.impl.BookServiceImpl;
+import com.book.util.StoreUtil;
 
 public class ProcessPaymentServlet extends HttpServlet {
 
@@ -38,7 +38,7 @@ public class ProcessPaymentServlet extends HttpServlet {
             RequestDispatcher rd = req.getRequestDispatcher("CustomerHome.html");
             rd.include(req, res);
             StoreUtil.setActiveTab(pw, "cart");
-            pw.println("<div id='topmid' style='background-color:grey'>Your Orders</div>");
+            pw.println("<div id='topmid' style= \"color: #FFFFFF;  text-align: center; text-shadow: 2px 2px #ff0000;  width: 100%;  margin-bottom: 10px; padding: 8px; font-weight: bold; font-size: 25px; font-style: oblique;\">Your Orders</div>");
             pw.println("<div class=\"container\">\r\n"
                     + "        <div class=\"card-columns\">");
             HttpSession session = req.getSession();

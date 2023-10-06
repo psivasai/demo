@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Retro Reads</title>
+
+<link rel="stylesheet" href="styles.css">
+
+</head>
+<body style="overflow: hidden;">
+    <nav class="navbar">
+        <div class="logo">
+            <img src="./books.png" alt="logo">
+        </div>
+        <div class="menu-toggle" id="menu-toggle">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="./index.html">Home</a></li>
+            <li><a href="./AboutUs.html">About Us</a></li>
+            <li><a href="./CustomerRegister.html">Register</a></li>
+            <li><a href="login.html">Login</a></li>
+        </ul>
+    </nav>
+
+    <div>
+        <iframe src="https://flowcv.me/padmakshi" class="aboutUs" title="Iframe Example"></iframe>
+    </div>
+
+   	<script>
+        document.addEventListener('DOMContentLoaded', function () {
+	    const menuToggle = document.getElementById('menu-toggle');
+	    const navLinks = document.getElementById('nav-links');
+	
+	    menuToggle.addEventListener('click', function () {
+        navLinks.classList.toggle('active');
+    });
+	});
+    </script>
+</body>

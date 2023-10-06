@@ -9,13 +9,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.bittercode.constant.BookStoreConstants;
-import com.bittercode.constant.ResponseCode;
-import com.bittercode.constant.db.UsersDBConstants;
-import com.bittercode.model.User;
-import com.bittercode.model.UserRole;
-import com.bittercode.service.UserService;
-import com.bittercode.service.impl.UserServiceImpl;
+import com.book.constant.BookStoreConstants;
+import com.book.constant.ResponseCode;
+import com.book.constant.db.UsersDBConstants;
+import com.book.model.User;
+import com.book.model.UserRole;
+import com.book.service.UserService;
+import com.book.service.impl.UserServiceImpl;
 
 public class CustomerRegisterServlet extends HttpServlet {
 
@@ -42,11 +42,13 @@ public class CustomerRegisterServlet extends HttpServlet {
             String respCode = userService.register(UserRole.CUSTOMER, user);
             System.out.println(respCode);
             if (ResponseCode.SUCCESS.name().equalsIgnoreCase(respCode)) {
-                RequestDispatcher rd = req.getRequestDispatcher("CustomerLogin.html");
+                RequestDispatcher rd = req.getRequestDispatcher("Alert.html");
                 rd.include(req, res);
-                pw.println("<table class=\"tab\"><tr><td>User Registered Successfully</td></tr></table>");
+                pw.println("<table class = \"caption\" ><tr><td><p> User Registered Successfully <p>  <br/>" 
+                		+ "<a href = \"CustomerLogin.html\" >Click here to <b>Login<b> </a>"
+                		+ "  </td></tr></table>");
             } else {
-                RequestDispatcher rd = req.getRequestDispatcher("CustomerRegister.html");
+                RequestDispatcher rd = req.getRequestDispatcher("Alert.html");
                 rd.include(req, res);
                 pw.println("<table class=\"tab\"><tr><td>" + respCode + "</td></tr></table>");
                 pw.println("Sorry for interruption! Try again");

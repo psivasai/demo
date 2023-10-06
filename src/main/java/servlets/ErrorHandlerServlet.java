@@ -10,10 +10,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.bittercode.constant.ResponseCode;
-import com.bittercode.model.StoreException;
-import com.bittercode.model.UserRole;
-import com.bittercode.util.StoreUtil;
+import com.book.constant.ResponseCode;
+import com.book.model.StoreException;
+import com.book.model.UserRole;
+import com.book.util.StoreUtil;
 
 public class ErrorHandlerServlet extends HttpServlet {
 
